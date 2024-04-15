@@ -1,5 +1,5 @@
 # Onehub PHP Library
-```
+```PHP
 $x_username           = "";
 $x_apikey             = "";
 
