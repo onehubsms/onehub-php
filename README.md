@@ -1,4 +1,4 @@
-# Onehub PHP Library
+# Onehub PHP Sending SMS Library
 ```PHP
 $x_username           = "";
 $x_apikey             = "";
@@ -76,3 +76,231 @@ You can get your username and API Key [here](https://dashboard.onehub.co.ke/acco
     "message":"Unauthorized"
 }
 ```
+# Onehub Add Contacts PHP library
+```PHP
+// authentication
+$x_username      = "";
+$x_apikey        = "";
+
+// data
+$createContact   = array(
+    "name"       => "John Migo", # contact name
+    "phone"      => "+254711xxxxxx", # international format
+    "tags"       => "developer,nairobi", # optional comma separated tags
+    "groups"     => "Nairobi Coding, Group 2" # optional groups to add contact
+);
+
+// endoint
+$addContactURL     = "https://api.braceafrica.com/v1/contacts/add";
+
+// encoding params
+$params            = json_encode($createContact);
+$req               = curl_init($addContactURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $params);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Content-Length: '.strlen($params),
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` 
+
+`phone` -	`[Type: String]` `[Required]` - Must be in international format.
+
+`tags` - `[Type: String]`	`[Optional]` - A unique field to help group contacts e.g football,team,family.
+
+`groups` - `[Type: String]`	`[Optional]` - This is a group name that the contacts will be added to. It must be an existing group.
+# Response Body Parameters
+## Response in case of successful adding of a contact:
+```json
+{
+    "status": 200,
+    "message": "Contact added"
+}
+```
+# Onehub Edit Contacts PHP library
+```PHP
+// authentication
+$x_username      = "";
+$x_apikey        = "";
+
+// data
+$editContactData   = array(
+    "name"       => "John New", # new contact name
+    "phone"      => "+254711xxxxxx", # new phonenumber - international format
+    "tags"       => "Edited Tag 1, Edited Tag", # new tags - comma separated tags
+    "groups"     => "New Group1" # new groups - optional groups to link contact
+);
+
+// id of contact to edit: this can be gotten from the fetch contacts api
+$contactId          = "1";
+
+// endoint
+$editContactURL     = "https://api.braceafrica.com/v1/contacts/edit/".$contactId;
+
+// encoding params
+$params             = json_encode($editContactData);
+$req                = curl_init($editContactURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $params);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Content-Length: '.strlen($params),
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` 
+
+`phone` -	`[Type: String]` `[Required]` - Must be in international format.
+
+`tags` - `[Type: String]`	`[Optional]` - A unique field to help group contacts e.g football,team,family.
+
+`groups` - `[Type: String]`	`[Optional]` - This is a group name that the contacts will be added to. It must be an existing group.
+# Response Body Parameters
+## Response in case of successful editing of a contact:
+```json
+{
+    "status": 200,
+    "message": "Contact has been updated"
+}
+```
+# Onehub Fetch Contacts PHP library
+```PHP
+// authentication
+$x_username          = "";
+$x_apikey            = "";
+
+// endoint
+$fetchContactURL     = "https://api.braceafrica.com/v1/contacts/fetch";
+
+// encoding params
+$req                 = curl_init($fetchContactURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "GET");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` 
+
+`phone` -	`[Type: String]` `[Required]` - Must be in international format.
+
+`tags` - `[Type: String]`	`[Optional]` - A unique field to help group contacts e.g football,team,family.
+
+`groups` - `[Type: String]`	`[Optional]` - This is a group name that the contacts will be added to. It must be an existing group.
+# Response Body Parameters
+## Response in case of successful fetching of a contact:
+```json
+{
+    "status": 200,
+    "contacts": [
+        {
+            "id": 2,
+            "name": "Jane Mwaura",
+            "phoneNumber": "+254712345678",
+            "tags": "kenya,nairobi",
+            "groups": [],
+            "createdOn": "2019-12-02T00:00:00.000Z",
+            "lastEditedOn": null
+        }
+    ]
+}
+```
+# Onehub Delete Contacts PHP library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+// id of contact to delete
+$params            = array(
+    "contactIds"=>array(1,2,3,4),
+);
+
+$contactsData = json_encode($params);
+
+// endoint
+$deleteContactURL     = "https://api.braceafrica.com/v1/contacts/delete;
+
+$req                  = curl_init($deleteContactURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $contactsData);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+## ```!``` Please note that this will also remove the contact from all linked groups.
+```json
+{
+    "contactIds": [1,2,3,4]
+}
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` 
+
+`phone` -	`[Type: String]` `[Required]` - Must be in international format.
+
+`tags` - `[Type: String]`	`[Optional]` - A unique field to help group contacts e.g football,team,family.
+
+`groups` - `[Type: String]`	`[Optional]` - This is a group name that the contacts will be added to. It must be an existing group.
