@@ -304,3 +304,361 @@ var_dump($res);
 `tags` - `[Type: String]`	`[Optional]` - A unique field to help group contacts e.g football,team,family.
 
 `groups` - `[Type: String]`	`[Optional]` - This is a group name that the contacts will be added to. It must be an existing group.
+# Onehub PHP Create Group Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+// id of contact to delete
+$params = array(
+    "name" => "",
+    "tags" => "",
+);
+
+$addGroup = json_encode($params);
+
+// endoint
+$addGroupURL     = "https://api.braceafrica.com/v1/contacts/groups/add";
+
+$req             = curl_init($addGroupURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $addGroup);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` - The group name.
+
+`tags` - `[Type: String]`	`[Optional]` - These are tags in the contacts you want to link. The group will be formed and the contacts automatically linked to the group.
+# Onehub PHP Edit Group Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+$groupId = "";
+
+// id of contact to delete
+$params = array(
+    "name"=>""
+);
+
+$editGroup = json_encode($params);
+
+// endoint
+$editGroupURL     = "https://api.braceafrica.com/v1/contacts/groups/edit/".$groupId;
+
+$req                  = curl_init($editGroupURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $editGroup);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` - The group name.
+
+`tags` - `[Type: String]`	`[Optional]` - These are tags in the contacts you want to link. The group will be formed and the contacts automatically linked to the group.
+# Response Body Parameters
+## Response in case of successful editing of a group:
+```json
+{
+    "status": 200,
+    "message": "Group has been updated"
+}
+```
+# Onehub PHP Fetch Group Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+// endoint
+$fetchGroupsURL       = "https://api.braceafrica.com/v1/contacts/groups/fetch";
+
+$req                  = curl_init($fetchGroupsURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "GET");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` - The group name.
+
+`tags` - `[Type: String]`	`[Optional]` - These are tags in the contacts you want to link. The group will be formed and the contacts automatically linked to the group.
+# Response Body Parameters
+## Response in case of successful fetching of a group:
+```json
+{
+    "status": 200,
+    "groups": [
+        {
+            "groupId": 12,
+            "groupName": "Kenzu Safaris",
+            "createdOn": "2019-05-17T00:00:00.000Z",
+            "contacts": []
+        }
+    ]
+}
+```
+# Onehub PHP Link Contacts To Group Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+$groupId = "";
+
+// id of contact to delete
+$params = array(
+    "contactIds"=>array(1,2,3,4),
+);
+
+$contactsData = json_encode($params);
+
+// endoint
+$addContactsToGroupURL     = "https://api.braceafrica.com/v1/contacts/add/".$groupId;
+
+$req                  = curl_init($addContactsToGroupURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $contactsData);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` - The group name.
+
+`tags` - `[Type: String]`	`[Optional]` - These are tags in the contacts you want to link. The group will be formed and the contacts automatically linked to the group.
+# Response Body Parameters
+## Response in case of successful linking contacts to a group:
+```json
+{
+    "status": 200,
+    "message": "The contacts linked to group"
+}
+```
+# Onehub PHP Fetch Group Contacts Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+$groupId = "";
+
+// endoint
+$fetchGroupContactsURL       = "https://api.braceafrica.com/v1/contacts//groups/fetch/".$groupId;
+
+$req                  = curl_init($fetchGroupContactsURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "GET");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` - The group name.
+
+`tags` - `[Type: String]`	`[Optional]` - These are tags in the contacts you want to link. The group will be formed and the contacts automatically linked to the group.
+# Response Body Parameters
+## Response in case of successful fetching group contacts:
+```json
+{
+    "groupId": 2536,
+    "groupName": "Chama Ya Mama",
+    "contacts": [
+        {
+            "id": 65,
+            "name": "John Doe",
+            "phoneNumber": "+2547xxx4578",
+            "tags": "chairman"
+        },
+        {
+            "id": 63,
+            "name": "Pendo JM",
+            "phoneNumber": "+2547xxy4597",
+            "tags": "member"
+        }
+    ]
+}
+```
+# Onehub PHP Remove Group Contacts Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+$groupId = "";
+
+// id of contact to delete
+$params = array(
+    "contactIds"=>array(1,2,3,4),
+);
+
+$contactsData = json_encode($params);
+
+// endoint
+$deleteGroupContactsURL     = "https://api.braceafrica.com/v1/contacts/delete/".$groupId;
+
+$req                  = curl_init($deleteGroupContactsURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $contactsData);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` - The group name.
+
+`tags` - `[Type: String]`	`[Optional]` - These are tags in the contacts you want to link. The group will be formed and the contacts automatically linked to the group.
+# Response Body Parameters
+## Response in case of successful removing group contacts:
+```json
+{
+    "status": 200,
+    "message": "Contacts removed form group"
+}
+```
+# Onehub PHP Delete Groups Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+// id of group to delete
+$groupId = "";
+
+// endoint
+$deleteGroupURL             = "https://api.braceafrica.com/v1/contacts/groups/delete";
+
+$params = array(
+    "groupIds"=>array(1,2,3,4)
+);
+
+$deleteGroups = json_encode($params)
+
+$req                  = curl_init($deleteGroupURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_POSTFIELDS, $deleteGroups);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Request Body Parameters
+`name` - `[Type: String]` `[Required]` - The group name.
+
+`tags` - `[Type: String]`	`[Optional]` - These are tags in the contacts you want to link. The group will be formed and the contacts automatically linked to the group.
+# Response Body Parameters
+## Response in case of successful deleting groups:
+```json
+{
+    "status": 200,
+    "message": "4 groups have been deleted"
+}
+```
