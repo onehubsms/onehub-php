@@ -662,3 +662,57 @@ var_dump($res);
     "message": "4 groups have been deleted"
 }
 ```
+# Onehub PHP Sender Ids Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+// endoint
+$fetchSenderidsURL     = "https://api.braceafrica.com/v1/sms/senderIds/fetch";
+
+$req                  = curl_init($fetchSenderidsURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "GET");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Response Body Parameters
+## Response in case of successful fetching of Sender Ids:
+```json
+{
+    "status": 200,
+    "senderids": [
+        {
+            "sender_id": "BraceAfrica",
+            "country": "Kenya",
+            "status": "active"
+        },
+        {
+            "sender_id": "JubaPay",
+            "country": "Kenya",
+            "status": "active"
+        },
+        {
+            "sender_id": "Foleni",
+            "country": "Uganda",
+            "status": "active"
+        }
+    ]
+}
+```
