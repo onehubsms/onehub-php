@@ -91,7 +91,7 @@ $createContact   = array(
 );
 
 // endoint
-$addContactURL     = "https://api.braceafrica.com/v1/contacts/add";
+$addContactURL     = "https://api.onehub.co.ke/v1/contacts/add";
 
 // encoding params
 $params            = json_encode($createContact);
@@ -152,7 +152,7 @@ $editContactData   = array(
 $contactId          = "1";
 
 // endoint
-$editContactURL     = "https://api.braceafrica.com/v1/contacts/edit/".$contactId;
+$editContactURL     = "https://api.onehub.co.ke/v1/contacts/edit/".$contactId;
 
 // encoding params
 $params             = json_encode($editContactData);
@@ -202,7 +202,7 @@ $x_username          = "";
 $x_apikey            = "";
 
 // endoint
-$fetchContactURL     = "https://api.braceafrica.com/v1/contacts/fetch";
+$fetchContactURL     = "https://api.onehub.co.ke/v1/contacts/fetch";
 
 // encoding params
 $req                 = curl_init($fetchContactURL);
@@ -266,7 +266,7 @@ $params            = array(
 $contactsData = json_encode($params);
 
 // endoint
-$deleteContactURL     = "https://api.braceafrica.com/v1/contacts/delete;
+$deleteContactURL     = "https://api.onehub.co.ke/v1/contacts/delete;
 
 $req                  = curl_init($deleteContactURL);
 
@@ -319,7 +319,7 @@ $params = array(
 $addGroup = json_encode($params);
 
 // endoint
-$addGroupURL     = "https://api.braceafrica.com/v1/contacts/groups/add";
+$addGroupURL     = "https://api.onehub.co.ke/v1/contacts/groups/add";
 
 $req             = curl_init($addGroupURL);
 
@@ -363,7 +363,7 @@ $params = array(
 $editGroup = json_encode($params);
 
 // endoint
-$editGroupURL     = "https://api.braceafrica.com/v1/contacts/groups/edit/".$groupId;
+$editGroupURL     = "https://api.onehub.co.ke/v1/contacts/groups/edit/".$groupId;
 
 $req                  = curl_init($editGroupURL);
 
@@ -406,7 +406,7 @@ $x_username           = "";
 $x_apikey             = "";
 
 // endoint
-$fetchGroupsURL       = "https://api.braceafrica.com/v1/contacts/groups/fetch";
+$fetchGroupsURL       = "https://api.onehub.co.ke/v1/contacts/groups/fetch";
 
 $req                  = curl_init($fetchGroupsURL);
 
@@ -464,7 +464,7 @@ $params = array(
 $contactsData = json_encode($params);
 
 // endoint
-$addContactsToGroupURL     = "https://api.braceafrica.com/v1/contacts/add/".$groupId;
+$addContactsToGroupURL     = "https://api.onehub.co.ke/v1/contacts/add/".$groupId;
 
 $req                  = curl_init($addContactsToGroupURL);
 
@@ -509,7 +509,7 @@ $x_apikey             = "";
 $groupId = "";
 
 // endoint
-$fetchGroupContactsURL       = "https://api.braceafrica.com/v1/contacts//groups/fetch/".$groupId;
+$fetchGroupContactsURL       = "https://api.onehub.co.ke/v1/contacts//groups/fetch/".$groupId;
 
 $req                  = curl_init($fetchGroupContactsURL);
 
@@ -574,7 +574,7 @@ $params = array(
 $contactsData = json_encode($params);
 
 // endoint
-$deleteGroupContactsURL     = "https://api.braceafrica.com/v1/contacts/delete/".$groupId;
+$deleteGroupContactsURL     = "https://api.onehub.co.ke/v1/contacts/delete/".$groupId;
 
 $req                  = curl_init($deleteGroupContactsURL);
 
@@ -620,7 +620,7 @@ $x_apikey             = "";
 $groupId = "";
 
 // endoint
-$deleteGroupURL             = "https://api.braceafrica.com/v1/contacts/groups/delete";
+$deleteGroupURL             = "https://api.onehub.co.ke/v1/contacts/groups/delete";
 
 $params = array(
     "groupIds"=>array(1,2,3,4)
@@ -669,7 +669,7 @@ $x_username           = "";
 $x_apikey             = "";
 
 // endoint
-$fetchSenderidsURL     = "https://api.braceafrica.com/v1/sms/senderIds/fetch";
+$fetchSenderidsURL     = "https://api.onehub.co.ke/v1/sms/senderIds/fetch";
 
 $req                  = curl_init($fetchSenderidsURL);
 
@@ -723,7 +723,7 @@ $x_username           = "";
 $x_apikey             = "";
 
 // endoint
-$fetchBalanceURL     = "https://api.braceafrica.com/v1/billing/balance";
+$fetchBalanceURL     = "https://api.onehub.co.ke/v1/billing/balance";
 
 $req                  = curl_init($fetchBalanceURL);
 
@@ -764,7 +764,7 @@ $x_username           = "";
 $x_apikey             = "";
 
 // endoint
-$fetchStatementURL     = "https://api.braceafrica.com/v1/billing/topups";
+$fetchStatementURL     = "https://api.onehub.co.ke/v1/billing/topups";
 
 $req                  = curl_init($fetchStatementURL);
 
