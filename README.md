@@ -716,3 +716,107 @@ var_dump($res);
     ]
 }
 ```
+# Onehub PHP Fetch Account Balance Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+// endoint
+$fetchBalanceURL     = "https://api.braceafrica.com/v1/billing/balance";
+
+$req                  = curl_init($fetchBalanceURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "GET");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Response Body Parameters
+## Response in case of successful fetching account balance:
+```json
+{
+    "status": 200,
+    "data": {
+        "amount": 6080.11,
+        "currency": "KES"
+    }
+}
+```
+# Onehub PHP Fetch Account Statement Library
+```PHP
+// authentication
+$x_username           = "";
+$x_apikey             = "";
+
+// endoint
+$fetchStatementURL     = "https://api.braceafrica.com/v1/billing/topups";
+
+$req                  = curl_init($fetchStatementURL);
+
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "GET");
+curl_setopt($req, CURLOPT_TIMEOUT, 60);
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'x-api-user: '.$x_username,
+    'x-api-key: '.$x_apikey
+));
+
+// read api response
+$res              = curl_exec($req);
+
+// close curl
+curl_close($req);
+
+// print the raw json response
+var_dump($res);
+```
+# Response Body Parameters
+## Response in case of successful fetching account statement:
+```json
+{
+    "status": 200,
+    "data": [
+        {
+            "id": 4155,
+            "amount": "KES 500",
+            "description": "Mpesa Code ML689276",
+            "type": "MPESA",
+            "date_created": "2019-12-22T14:38:44.000Z",
+            "currency": "KES"
+        }
+        {
+            "id": 4338,
+            "amount": "KES 1100",
+            "description": "Mpesa Code MJUYEO67M",
+            "type": "MPESA",
+            "date_created": "2019-12-22T14:38:44.000Z",
+            "currency": "KES"
+        }
+        {
+            "id": 4598,
+            "amount": "KES 8000",
+            "description": "Admin Top Up",
+            "type": "Admin",
+            "date_created": "2019-12-22T14:38:44.000Z",
+            "currency": "KES"
+        }
+    ]
+}
+```
